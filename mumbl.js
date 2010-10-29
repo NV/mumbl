@@ -579,7 +579,7 @@ self.mumbl = self.mumbl || (function (self) {
 		self[$add_evt_listener]("unload", mumbl.destruct, FALSE);
 		
 		return (paused = (stopped = TRUE));
-	}())) || (typeof audioElem.canPlayType === "function" && (function () {
+	}())) || /*(typeof audioElem.canPlayType === "function" && (function () {
 		player   = audioElem;
 		playlist = [];
 		
@@ -729,12 +729,13 @@ self.mumbl = self.mumbl || (function (self) {
 		addEvent("ended", onEnded);
 		
 		return (player.autoplay = TRUE);
-	}())) || (self.soundManager && (function () {
+	}())) ||*/ (self.soundManager && (function () {
 		// http://www.schillmania.com/projects/soundmanager2/doc/
 		player   = self.soundManager;
 		playlist = [];
 		
 		player.useFastPolling = player.allowPolling = TRUE;
+		player.useHTML5Audio = TRUE;
 		
 		var sounds     = player.sounds,
 		mumblNS        = "mumbl:",
