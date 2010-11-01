@@ -2,6 +2,12 @@
 
 // XXX: make a portable library out of this mess
 
+if (window.HTMLAudioElement && HTMLAudioElement.prototype.canPlayType) {
+	if (!document.createElement("audio").canPlayType("audio/mpeg")) {
+		HTMLAudioElement.prototype.canPlayType = null;
+	}
+}
+
 mumbl.onready(function (mumbl) {
 	var $ = jQuery,
 	window = this,
@@ -19,7 +25,7 @@ mumbl.onready(function (mumbl) {
     
 	for (var i = 0; i < playlist.length; i++) {
 		mumbl.addTrack(
-			playlist.location + encodeURIComponent(playlist[i]) + ".ogg", "audio/ogg; codecs=vorbis",
+//			playlist.location + encodeURIComponent(playlist[i]) + ".ogg", "audio/ogg; codecs=vorbis"
 			playlist.location + encodeURIComponent(playlist[i]) + ".mp3", "audio/mpeg"
 		);
 	}
